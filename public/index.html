@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Analizador de facturas | Naturgy</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Analizador de facturas eléctricas</p>
+          <h1>Sube tu factura de Naturgy y obtén los datos clave al instante.</h1>
+          <p class="subtitle">
+            Extrae automáticamente CUPS, consumos, potencia y términos de energía para validar tus costes.
+          </p>
+        </div>
+        <div class="hero-badge">
+          <span>Proveedor detectado</span>
+          <strong>Naturgy</strong>
+        </div>
+      </header>
+
+      <section class="upload-section">
+        <div id="dropzone" class="dropzone" role="button" tabindex="0">
+          <div class="dropzone-content">
+            <div class="icon">📄</div>
+            <h2>Arrastra tu PDF aquí</h2>
+            <p>o selecciona un archivo desde tu ordenador.</p>
+          </div>
+          <input id="fileInput" type="file" accept="application/pdf" />
+          <button id="fileButton" class="secondary">Seleccionar archivo</button>
+        </div>
+        <div id="loading" class="loading hidden">
+          <div class="spinner"></div>
+          <p>Procesando factura...</p>
+        </div>
+        <div id="error" class="error hidden"></div>
+      </section>
+
+      <section id="results" class="results hidden">
+        <div class="results-header">
+          <h2>Resultados de la factura</h2>
+          <span id="totalAmount" class="amount">-- €</span>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h3>Información del contrato</h3>
+            <div class="info-list">
+              <div>
+                <span>Proveedor</span>
+                <strong id="provider">-</strong>
+              </div>
+              <div>
+                <span>CUPS</span>
+                <strong id="cups">-</strong>
+              </div>
+              <div>
+                <span>NIF/CIF</span>
+                <strong id="holderId">-</strong>
+              </div>
+              <div>
+                <span>Tarifa</span>
+                <strong id="tariff">-</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Período y fechas</h3>
+            <div class="info-list">
+              <div>
+                <span>Fecha de factura</span>
+                <strong id="invoiceDate">-</strong>
+              </div>
+              <div>
+                <span>Periodo facturación</span>
+                <strong id="billingPeriod">-</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Consumos por período (kWh)</h3>
+            <div class="chart" id="consumptionChart"></div>
+            <div class="info-list inline">
+              <div>
+                <span>P1</span>
+                <strong id="consumptionP1">-</strong>
+              </div>
+              <div>
+                <span>P2</span>
+                <strong id="consumptionP2">-</strong>
+              </div>
+              <div>
+                <span>P3</span>
+                <strong id="consumptionP3">-</strong>
+              </div>
+              <div>
+                <span>Total</span>
+                <strong id="consumptionTotal">-</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Potencias contratadas (kW)</h3>
+            <div class="info-list inline">
+              <div>
+                <span>P1</span>
+                <strong id="powerP1">-</strong>
+              </div>
+              <div>
+                <span>P2</span>
+                <strong id="powerP2">-</strong>
+              </div>
+              <div>
+                <span>P3</span>
+                <strong id="powerP3">-</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Término de energía (€/kWh)</h3>
+            <div class="info-list inline">
+              <div>
+                <span>P1</span>
+                <strong id="energyP1">-</strong>
+              </div>
+              <div>
+                <span>P2</span>
+                <strong id="energyP2">-</strong>
+              </div>
+              <div>
+                <span>P3</span>
+                <strong id="energyP3">-</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Término de potencia (€/kW día)</h3>
+            <div class="info-list inline">
+              <div>
+                <span>P1</span>
+                <strong id="powerTermP1">-</strong>
+              </div>
+              <div>
+                <span>P2</span>
+                <strong id="powerTermP2">-</strong>
+              </div>
+              <div>
+                <span>P3</span>
+                <strong id="powerTermP3">-</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
